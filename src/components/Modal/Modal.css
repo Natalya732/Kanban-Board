@@ -1,22 +1,3 @@
-/* .modal{
-    position: fixed;
-    top: 0;
-    left:0;
-    height: 100vh;
-    width: 100%;
-    background-color: rgb(185, 127, 127);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.modal_content{
-    background-color: #fff;
-    border-radius: 3px;
-    max-height: 95vh;
-    overflow-y: auto;
-} */
-/*max-height and overflow-y is added to this bcoz if the content won't be contained in the given portion  than there a scrollbar 
-can be added*/
 
 .modal {
     position: fixed;

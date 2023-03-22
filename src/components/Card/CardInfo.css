@@ -5,10 +5,6 @@
   flex-direction: column;
   gap: 30px;
  width: 600px;
-  /* min-width: 550px;
-  width: fit-content;
-  max-width: 650px;
-  height: fit-content; */
 }
 
 .cardinfo_box{
@@ -16,23 +12,6 @@
     flex-direction: column;
     gap: 10px;
 }
-/* .cardinfo_box_title {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-  
-  .cardinfo_box_title p {
-    font-weight: bold;
-    font-size: 1.2rem;
-  }
-  
-  .cardinfo_box_title svg {
-    height: 18px;
-    width: 18px;
-  }
-   */
-
    .cardinfo_box_title{
     font-weight: bold;
     font-size: 1.3rem;

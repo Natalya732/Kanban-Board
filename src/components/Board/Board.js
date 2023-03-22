@@ -49,9 +49,3 @@ export default function Board(props) {
     </div>
   );
 }
-//here we have to give position: "relative " to the parent element of the dropdown so that it can be positioned absolute
-//the parent element here is board_top_more div
-
-//her in line 16 or 17 there is ? used in; props.boards?.card?,,     ? this is called a chaining operator, if the props won't get passed
-//then we will get this error that reading properties of null or so , thsu to elimiinate such errors , we are using chaining operator here
-//by chaining operator if there is any error in the board one seciton than it will exit from there  only and won't complete it

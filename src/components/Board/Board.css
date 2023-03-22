@@ -54,10 +54,3 @@ gap: 20px;
 .boards_cards_add:hover{
     box-shadow: 1px 2px 0 1px #ccc ;
 }
-
-    
-    /*Since overflow-y is given here so we have to give height as well,  now check this overflow functionality
-    HERE WE ARE TRYING TO CREATE A SCROLLBAR...... LOOK here we fixed height of board_cards as 100%, so we will also set the height of 
-    board i.e. the parent element's height to be 100% and similarly height of app_boards in app.css as 100%, only then it will 
-    have some effect as these all will adjust height according as per their parent element
-    */

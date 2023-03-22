@@ -27,10 +27,8 @@ export default function CardInfo(props) {
   const [activeColor, setActiveColor] = useState("");
 
   const { title, labels, desc, date, tasks } = props.card;
-  //here we are doing destructuring above so that we don't have to write props.item again and again.
 
   const [values, setValues] = useState({ ...props.card });
-  //here we just made copy of card and not only that we desctructured all the values that a card contain inside an object........so that we can just send the object while updating an object
 
   const calculatePercent = () => {
     if (values.tasks.length === 0) return "0";
@@ -39,6 +37,7 @@ export default function CardInfo(props) {
   };
 
   const addLabel = (value, color) => {
+    console.log(value);
     const index = values.lables?.findIndex((item) => item.text === value);
     if (index > -1) return;
     const label = {
@@ -47,26 +46,30 @@ export default function CardInfo(props) {
     };
     setValues({ ...values, labels: [...values.labels, label] });
     setActiveColor("");
+    console.log(value);
   };
 
   const removeLabel = (text) => {
     const index = values.labels?.findIndex((item) => item.text === text);
-    if (index < 0) return; //search for findIndex, if index = -1, means no element is found
+    if (index < 0) return;
     setValues({ ...values, label: values.labels.splice(index, 1) });
   };
 
   const addTask = (value) => {
+    console.log(value);
+
     const task = {
-      id: Date.now() + Math.random() * 2,
-      completed: false,
+      id: Date.now() + Math.random(),
       text: value,
+      completed: false,
     };
     setValues({
       ...values,
       tasks: [...values.tasks, task],
     });
+    console.log(value);
   };
-
+  console.log(values);
   const removeTask = (id) => {
     const index = values.tasks?.findIndex((item) => item.id === id);
     if (index < 0) return;
@@ -74,6 +77,16 @@ export default function CardInfo(props) {
     const tempTasks = values.tasks?.splice(index, 1);
     setValues({ ...values, tasks: tempTasks });
   };
+
+  const updateTask = (id, completed) => {
+    const index = values.tasks?.findIndex((item) => item.id === id);
+    if (index < 0) return;
+
+    const tempTasks = [...values.tasks];
+    tempTasks[index].completed = completed;
+    setValues({ ...values, tasks: tempTasks });
+  };
+
   useEffect(() => {
     props.updateCard(props.card.id, props.boardId, values);
   }, [values]);
@@ -87,7 +100,7 @@ export default function CardInfo(props) {
           </div>
           <div className="cardinfo_box_body">
             <Editable
-              text={values.title} // here we are getting the destructured value
+              text={values.title}
               default={values.title}
               placeholder="Enter title"
               buttonText="Set Title"
@@ -169,44 +182,7 @@ export default function CardInfo(props) {
             />
           </div>
         </div>
-        {/* ********************************* */}
-        {/* <div className="cardinfo_box">
-          <div className="cardinfo_box_title">
-            <Tag />
-            <p>Labels</p>
-          </div>
-          <div className="cardinfo_box_labels">
-            {values.labels?.map((item, index) => (
-              <label
-                key={index}
-                style={{ backgroundColor: item.color, color: "#fff" }}
-              >
-                {item.text}
-                <X onClick={() => removeLabel(item)} />
-              </label>
-            ))}
-          </div>
-          <div className="cardinfo_box_colors">
-            {colors.map((item, index) => (
-              <li
-                key={index + item}
-                style={{ backgroundColor: item }}
-                className={item === activeColor ? "active" : ""}
-                onClick={() => setActiveColor(item)}
-              />
-            ))}
-          </div>
-          <div className="cardinfo_box_body">
-            <Editable
-              text="Add Label"
-              placeholder="Enter Label"
-              buttonText="Add"
-              onSubmit={(value) => addLabel(value, activeColor)}
-            />
-          </div>
-        </div> */}
 
-        {/* ********************************** */}
         <div className="cardinfo_box">
           <div className="cardinfo_box_title">
             <CheckSquare />
@@ -216,17 +192,28 @@ export default function CardInfo(props) {
           <div className="cardinfo_box_progress_bar">
             <div
               className="cardinfo_box_progress"
-              style={{ width: calculatePercent() + "%" }}
+              style={{
+                width: calculatePercent() + "%",
+                backgroundColor: calculatePercent() == "100" ? "limegreen" : "",
+              }}
             />
           </div>
 
           <div className="cardinfo_box_list">
             {values.tasks?.map((item) => {
-              <div key={item.id} className="cardinfo_task">
-                <input type="checkbox" defaultValue={item.completed} />
-                <p>{item.text}</p>
-                <Trash onClick={() => removeTask(item.id)} />
-              </div>;
+              return (
+                <div key={item.id} className="cardinfo_task">
+                  <input
+                    type="checkbox"
+                    defaultValue={item.completed}
+                    onChange={(event) =>
+                      updateTask(item.id, event.target.checked)
+                    }
+                  />
+                  <p>{item.text}</p>
+                  <Trash onClick={() => removeTask(item.id)} />
+                </div>
+              );
             })}
 
             <div className="cardinfo_box_body">
@@ -234,7 +221,7 @@ export default function CardInfo(props) {
                 text="Add new task"
                 placeholder="Enter Task"
                 buttonText="Add Task"
-                onSubmit={addTask}
+                onSubmit={(value) => addTask(value)}
               />
             </div>
           </div>
