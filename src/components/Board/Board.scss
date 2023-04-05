@@ -1,0 +1,129 @@
+.board {
+  min-width: 290px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.board_top {
+  display: flex;
+  background-color: #eee;
+  box-shadow: 1px 1px 0px 2px #ccc;
+  border-radius: 12px;
+  padding: 2px;
+  border-bottom: 1px solid #ccc;
+}
+.board_top_more {
+  position: relative;
+  cursor: pointer;
+}
+.board_dropdown {
+  background-color: #fff;
+  width: 130px;
+  padding: 10px;
+  border-radius: 3px;
+  box-shadow: 1px 0 20px rgba(0, 0, 0, 0.05);
+}
+.board_dropdown p {
+  cursor: pointer;
+}
+.board_top_title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  gap: 155px;
+  padding: 0px 4px;
+  .board_top_title span {
+    color: gray;
+  }
+}
+.board_cards {
+  flex: 1;
+  height: 100%;
+  background-color: #c9c6c6;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  overflow-y: auto;
+  .boards_cards_add {
+    background-color: #fff;
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: 1px 2px 0 1px rgba(0, 0, 0, 0.15);
+    width: 100%;
+  }
+}
+.boards_cards_add:hover {
+  box-shadow: 1px 2px 0 1px #ccc;
+}
+
+/* theme coloring */
+.board.theme-blue {
+  .board_cards {
+    background-color: rgb(171, 213, 247);
+  }
+
+  .board_top_title {
+    color: rgb(5, 46, 99);
+  }
+  .board_top_more {
+    color: rgb(5, 46, 99);
+  }
+}
+.board.theme-orange {
+  .board_cards {
+    background-color: #f7d49f;
+  }
+
+  .board_top_title {
+    color: rgb(184, 53, 6);
+  }
+  .board_top_more {
+    color: rgb(184, 53, 6);
+  }
+}
+.board.theme-purple {
+  .board_cards {
+    background-color: #d0b7f4;
+  }
+
+  .board_top_title {
+    color: rgb(78, 13, 78);
+  }
+  .board_top_more {
+    color: rgb(78, 13, 78);
+  }
+}
+.board.theme-green {
+  .board_cards {
+    background-color: #88e288;
+  }
+
+  .board_top_title {
+    color: rgb(2, 73, 2);
+  }
+  .board_top_more {
+    color: rgb(2, 73, 2);
+  }
+}
+.board.theme-dark {
+  .board_cards {
+    background-color: #777;
+  }
+
+  .board_top_title {
+    color: #333;
+  }
+  .board_top_more {
+    color: #333;
+  }
+}
+/*Since overflow-y is given here so we have to give height as well,  now check this overflow functionality
+    HERE WE ARE TRYING TO CREATE A SCROLLBAR...... LOOK here we fixed height of board_cards as 100%, so we will also set the height of 
+    board i.e. the parent element's height to be 100% and similarly height of app_boards in app.css as 100%, only then it will 
+    have some effect as these all will adjust height according as per their parent element
+    */
